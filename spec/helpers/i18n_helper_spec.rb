@@ -1,10 +1,8 @@
 require 'spec_helper'
 
-require 'action_view'
-
 require 'sxle/helpers/i18n_helper'
 
-class HelperTester
+class I18nHelperTest
   include Sxle::Helpers::I18nHelper
 end
 
@@ -12,7 +10,7 @@ describe "I18n" do
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::UrlHelper
 
-  subject { HelperTester.new }
+  subject { I18nHelperTest.new }
   describe "safe_t" do
     it "escapes unsafe text" do
       subject.stub(:t).with('my_key').and_return('this is <strong>unsafe</strong>')
