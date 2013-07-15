@@ -2,7 +2,7 @@
 
 Sx.I18n =
   # ported from rails's date helper distance_of_time_in_words
-  timeDistanceInWords: (fromTime, toTime) ->
+  timeDistanceInWords: (fromTime, toTime = new Date()) ->
     distanceInMinutes = Math.round(Math.abs((toTime - fromTime) / 60 / 1000))
 
     if (distanceInMinutes >= 0 && distanceInMinutes <= 1)
@@ -32,7 +32,7 @@ Sx.I18n =
       tyear = toTime.getFullYear()
       remainder = (distanceInMinutes % 525600)
       distanceInYears = Math.floor(distanceInMinutes / 525600)
-     
+
       fyear++ if (fromTime.getMonth() + 1) >= 3
       tyear-- if (toTime.getMonth() + 1) < 3
 
