@@ -3,6 +3,9 @@
 Sx.I18n =
   # ported from rails's date helper distance_of_time_in_words
   timeDistanceInWords: (fromTime, toTime = new Date()) ->
+    fromTime = new Date(fromTime)
+    toTime   = new Date(toTime)
+
     distanceInMinutes = Math.round(Math.abs((toTime - fromTime) / 60 / 1000))
 
     if (distanceInMinutes >= 0 && distanceInMinutes <= 1)
