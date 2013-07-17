@@ -1,0 +1,11 @@
+#!/bin/bash
+
+(
+  while [ ! -e 'Gemfile' ]; do
+    cd ..
+  done
+
+  echo "Hosting on `pwd`"
+  open 'http://localhost:9999/spec/javascripts'
+  python -m SimpleHTTPServer 9999
+)
