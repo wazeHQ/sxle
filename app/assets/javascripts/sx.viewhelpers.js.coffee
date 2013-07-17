@@ -57,12 +57,20 @@ $.extend Sx.ViewHelpers,
     controls = @contentTag 'div', control, class: 'controls'
     @contentTag 'div', @safeString(label + controls), class: 'control-group'
 
-  textField: (label, id, attributes = {}) ->
+  bootstrapTextField: (label, id, attributes = {}) ->
     attributes.type or= 'text'
     attributes.id or= id
     attributes.name or= id
     control = @contentTag 'input', '', attributes
     @bootstrapControl(label, id, control)
+
+  bootstrapTextArea: (label, id, attributes = {}) ->
+    attributes.id or= id
+    attributes.name or= id
+    attributes.rows or= 5
+    control = @contentTag 'textarea', '', attributes
+    @bootstrapControl(label, id, control)
+
 
   radio: (label, name, value, attributes = {}) ->
     attributes.type or= 'radio'
@@ -70,6 +78,6 @@ $.extend Sx.ViewHelpers,
     attributes.name or= name
     attributes.value or= value
     radio = @contentTag 'input', '', attributes
-    label = @contentTag 'label', label, for: attributes.id
-    @safeString(radio + label)
+    contents = @safeString(radio + label)
+    @contentTag 'label', contents, class: 'radio'
 

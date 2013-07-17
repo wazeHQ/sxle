@@ -53,10 +53,10 @@ describe "Sx.ViewHelpers", ->
           "<div class='controls'>the-contents</div>" +
           "</div>"
 
-  describe "#textField", ->
+  describe "#bootstrapTextField", ->
     it 'returns a bootstrap text field', ->
       attribs = { class: 'a-class', value: 'the-value' }
-      html = h.textField('the-label', 'the-id', attribs)
+      html = h.bootstrapTextField('the-label', 'the-id', attribs)
       expect(html.toString()).toEqual \
         "<div class='control-group'>" +
           "<label class='control-label' for='the-id'>the-label</label>" +
@@ -65,18 +65,35 @@ describe "Sx.ViewHelpers", ->
             "id='the-id' name='the-id'></input>" +
           "</div>" +
         "</div>"
+
+  describe "#bootstrapTextArea", ->
+    it 'returns a bootstrap text area', ->
+      attribs = { class: 'a-class', value: 'the-value' }
+      html = h.bootstrapTextArea('the-label', 'the-id', attribs)
+      expect(html.toString()).toEqual \
+        "<div class='control-group'>" +
+          "<label class='control-label' for='the-id'>the-label</label>" +
+          "<div class='controls'>" +
+            "<textarea class='a-class' value='the-value' " +
+            "id='the-id' name='the-id' rows='5'></textarea>" +
+          "</div>" +
+        "</div>"
       
   describe "#radio", ->
     it 'returns a radio button', ->
       html = h.radio('the-label', 'the-name', 'the-value')
       expect(html.toString()).toEqual \
-        "<input type='radio' id='the-name-the-value' name='the-name' " +
-          "value='the-value'></input>" +
-          "<label for='the-name-the-value'>the-label</label>"
+        "<label class='radio'>" +
+          "<input type='radio' id='the-name-the-value' name='the-name' " +
+            "value='the-value'></input>" +
+          "the-label" +
+        "</label>"
       
     it 'supports disabled radio buttons', ->
       html = h.radio('the-label', 'the-name', 'the-value', disabled: 'disabled')
       expect(html.toString()).toEqual \
-        "<input disabled='disabled' type='radio' id='the-name-the-value' " +
-          "name='the-name' value='the-value'></input>" +
-          "<label for='the-name-the-value'>the-label</label>"
+        "<label class='radio'>" +
+          "<input disabled='disabled' type='radio' id='the-name-the-value' " +
+            "name='the-name' value='the-value'></input>" +
+          "the-label" +
+        "</label>"
