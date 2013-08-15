@@ -1,5 +1,5 @@
 require "sxle/version"
-require "sxle/engine"
+require "sxle/engine" if defined?(::Rails)
 require "sxle/helpers/i18n_helper"
 require "sxle/helpers/html_helper"
 
