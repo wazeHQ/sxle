@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
 
   #spec.add_dependency "rails",               ">= 3.2.0"
   spec.add_dependency "active_support"
+  spec.add_dependency "actionpack"
   spec.add_dependency "i18n"
   spec.add_dependency "haml_coffee_assets",  "~> 1.12.0"
 
