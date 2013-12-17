@@ -1,11 +1,16 @@
 #!/bin/bash
 
+PORT=$1
+if [ "$PORT" == "" ]; then
+  PORT=12345
+fi
+
 (
   while [ ! -e 'Gemfile' ]; do
     cd ..
   done
 
   echo "Hosting on `pwd`"
-  open 'http://localhost:9999/spec/javascripts'
-  python -m SimpleHTTPServer 9999
+  open "http://localhost:$PORT/spec/javascripts"
+  python -m SimpleHTTPServer $PORT
 )
