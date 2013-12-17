@@ -97,3 +97,43 @@ describe "Sx.ViewHelpers", ->
             "name='the-name' value='the-value'></input>" +
           "the-label" +
         "</label>"
+
+  describe "#bootstrap3Control", ->
+    it 'returns a bootstrap3 control group', ->
+      html = h.bootstrap3Control('the-label', 'the-id', 'the-contents',
+        labelWidth: 4)
+      expect(html.toString()).toEqual \
+        "<div class='form-group'>" +
+          "<label class='control-label col-sm-4' for='the-id'>" +
+            "the-label</label>" +
+          "<div class='controls col-sm-8'>the-contents</div>" +
+          "</div>"
+
+  describe "#bootstrap3TextField", ->
+    it 'returns a bootstrap3 text field', ->
+      attribs = { class: 'a-class', value: 'the-value', labelWidth: 3 }
+      html = h.bootstrap3TextField('the-label', 'the-id', attribs)
+      expect(html.toString()).toEqual \
+        "<div class='form-group'>" +
+          "<label class='control-label col-sm-3' for='the-id'>" +
+            "the-label</label>" +
+          "<div class='controls col-sm-9'>" +
+            "<input class='a-class form-control' value='the-value' " +
+              "type='text' id='the-id' name='the-id'></input>" +
+          "</div>" +
+        "</div>"
+
+  describe "#bootstrap3TextArea", ->
+    it 'returns a bootstrap3 text area', ->
+      attribs = { class: 'a-class', value: 'the-value' }
+      html = h.bootstrap3TextArea('the-label', 'the-id', attribs)
+      expect(html.toString()).toEqual \
+        "<div class='form-group'>" +
+          "<label class='control-label col-sm-3' for='the-id'>" +
+            "the-label</label>" +
+          "<div class='controls col-sm-9'>" +
+            "<textarea class='a-class form-control' value='the-value' " +
+            "id='the-id' name='the-id' rows='5'></textarea>" +
+          "</div>" +
+        "</div>"
+

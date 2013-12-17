@@ -71,6 +71,48 @@ $.extend Sx.ViewHelpers,
     control = @contentTag 'textarea', '', attributes
     @bootstrapControl(label, id, control)
 
+  bootstrap3Control: (label, id, control, options) ->
+    labelWidth = options.labelWidth or 3
+    controlsWidth = 12 - labelWidth
+    label = @contentTag 'label', label,
+      class: "control-label col-sm-#{labelWidth}",
+      for: id
+    controls = @contentTag 'div', control,
+      class: "controls col-sm-#{controlsWidth}"
+    @contentTag 'div', @safeString(label + controls), class: 'form-group'
+
+  bootstrap3TextField: (label, id, attributes = {}) ->
+    bsOptions = @_getBootstrapOptions(attributes)
+    attributes.type or= 'text'
+    attributes.id or= id
+    attributes.name or= id
+    attributes.class = @_addClass(attributes.class, 'form-control')
+    control = @contentTag 'input', '', attributes
+    @bootstrap3Control(label, id, control, bsOptions)
+
+  bootstrap3TextArea: (label, id, attributes = {}) ->
+    bsOptions = @_getBootstrapOptions(attributes)
+    attributes.id or= id
+    attributes.name or= id
+    attributes.rows or= 5
+    attributes.class = @_addClass(attributes.class, 'form-control')
+    control = @contentTag 'textarea', '', attributes
+    @bootstrap3Control(label, id, control, bsOptions)
+
+  _addClass: (existingClass, newClass) ->
+    if existingClass?
+      "#{existingClass} #{newClass}"
+    else
+      newClass
+
+  _getBootstrapOptions: (options) ->
+    bsOptions = {}
+    for name in ['labelWidth']
+      if options[name]?
+        bsOptions[name] = options[name]
+        delete options[name]
+    bsOptions
+
 
   radio: (label, name, value, attributes = {}) ->
     attributes.type or= 'radio'
