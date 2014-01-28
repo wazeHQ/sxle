@@ -42,5 +42,19 @@ describe "I18n" do
       subject.safe_t('my_key').should be_html_safe
     end
 
+    context "when options[:default] is defined" do
+      it "is passed on to t" do
+        subject.should_receive(:t).with('my_key', default: 'my_default').and_return('abc')
+        subject.safe_t('my_key', default: 'my_default')
+      end
+    end
+
+    context "when options[:default] is not defined" do
+      it "does not pass options to t" do
+        subject.should_receive(:t).with('my_key').and_return('abc')
+        subject.safe_t('my_key')
+      end
+    end
+
   end
 end
