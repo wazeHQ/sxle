@@ -5,7 +5,11 @@ module Sxle
     module I18nHelper
 
       def safe_t(key, vars = {})
-        text = t(key)
+        if vars.include? :default
+          text = t(key, default: vars.delete(:default))
+        else
+          text = t(key)
+        end
         text = CGI::escape_html(text)
 
         vars.each do |name, value|

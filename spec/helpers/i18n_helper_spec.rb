@@ -42,5 +42,10 @@ describe "I18n" do
       subject.safe_t('my_key').should be_html_safe
     end
 
+    it "passes default argument along to t" do
+      subject.stub(:t).with('my_key', default: 'my_default').and_return('abc')
+      subject.safe_t('my_key', default: 'my_default').should == 'abc'
+    end
+
   end
 end
