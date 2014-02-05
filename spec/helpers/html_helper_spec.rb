@@ -50,6 +50,12 @@ describe "HtmlHelper" do
         "one&lt;b&gt;unsafe&lt;/b&gt;<br />two<br />three"
     end
 
+    it "does not escape safe lines" do
+      lines = "one<b>safe</b>\ntwo\nthree".html_safe
+      subject.lines_to_br(lines).should ==
+        "one<b>safe</b><br />two<br />three"
+    end
+
     it "returns safe html" do
       lines = "one<b>unsafe</b>\ntwo\nthree"
       subject.lines_to_br(lines).should be_html_safe
