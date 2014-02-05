@@ -6,7 +6,7 @@ module Sxle
       end
 
       def lines_to_br(text)
-        convert_lines(text, tag(:br)) { |line| CGI::escape_html(line) }
+        convert_lines(text, tag(:br)) { |line| text.html_safe? ? line : CGI::escape_html(line) }
       end
 
       private
