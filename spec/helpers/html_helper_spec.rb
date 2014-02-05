@@ -13,13 +13,13 @@ describe "HtmlHelper" do
   describe "#lines_to_paragraphs" do
     it "splits the lines to paragraphs" do
       lines = "one\ntwo\nthree"
-      subject.lines_to_paragraphs(lines).should == 
+      subject.lines_to_paragraphs(lines).should ==
         "<p>one</p><p>two</p><p>three</p>"
     end
 
     it "escapes the lines" do
       lines = "one<b>unsafe</b>\ntwo\nthree"
-      subject.lines_to_paragraphs(lines).should == 
+      subject.lines_to_paragraphs(lines).should ==
         "<p>one&lt;b&gt;unsafe&lt;/b&gt;</p><p>two</p><p>three</p>"
     end
 
@@ -34,6 +34,33 @@ describe "HtmlHelper" do
 
     it "returns '' if blank string" do
       subject.lines_to_paragraphs('   ').should == ''
+    end
+  end
+
+  describe "#lines_to_br" do
+    it "convert newlines into html linebreaks" do
+      lines = "one\ntwo\nthree"
+      subject.lines_to_br(lines).should ==
+        "one<br />two<br />three"
+    end
+
+    it "escapes the lines" do
+      lines = "one<b>unsafe</b>\ntwo\nthree"
+      subject.lines_to_br(lines).should ==
+        "one&lt;b&gt;unsafe&lt;/b&gt;<br />two<br />three"
+    end
+
+    it "returns safe html" do
+      lines = "one<b>unsafe</b>\ntwo\nthree"
+      subject.lines_to_br(lines).should be_html_safe
+    end
+
+    it "returns '' if nil" do
+      subject.lines_to_br(nil).should == ''
+    end
+
+    it "returns '' if blank string" do
+      subject.lines_to_br('   ').should == ''
     end
   end
 end
